@@ -257,6 +257,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 	this.capabilities = capabilities;
 	this.extensions = extensions;
 	this.state = state;
+	this.properties = properties;
 
 	// shadow map
 
@@ -1352,11 +1353,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 				_currentGeometryProgram = '';
 
-				object.render( function ( object ) {
-
-					_this.renderBufferImmediate( object, program, material );
-
-				} );
+				object.render(_this, program, material);
 
 			} else {
 

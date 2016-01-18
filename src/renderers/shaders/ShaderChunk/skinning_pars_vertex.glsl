@@ -35,9 +35,9 @@
 
 		uniform mat4 boneGlobalMatrices[ MAX_BONES ];
 
-		mat4 getBoneMatrix( const in float i ) {
+		mat4 getBoneMatrix( const in int i ) {
 
-			mat4 bone = boneGlobalMatrices[ int(i) ];
+			mat4 bone = boneGlobalMatrices[ i ];
 			return bone;
 
 		}
