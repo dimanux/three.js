@@ -245,7 +245,7 @@ THREE.Material.prototype = {
 
 	},
 
-	set wrapAround ( boolean ) {
+	set wrapAround ( value ) {
 
 		console.warn( 'THREE.' + this.type + ': .wrapAround has been removed.' );
 

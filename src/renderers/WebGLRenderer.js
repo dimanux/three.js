@@ -396,9 +396,9 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 	};
 
-	this.enableScissorTest = function ( boolean ) {
+	this.enableScissorTest = function ( value ) {
 
-		state.setScissorTest( boolean );
+		state.setScissorTest( value );
 
 	};
 
@@ -552,7 +552,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 		}
 
 		// remove all webgl properties
-		properties.delete( texture );
+		properties.remove( texture );
 
 	}
 
@@ -581,8 +581,8 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 		}
 
-		properties.delete( renderTarget.texture );
-		properties.delete( renderTarget );
+		properties.remove( renderTarget.texture );
+		properties.remove( renderTarget );
 
 	}
 
@@ -590,7 +590,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 		releaseMaterialProgramReference( material );
 
-		properties.delete( material );
+		properties.remove( material );
 
 	}
 
