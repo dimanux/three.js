@@ -30,10 +30,31 @@ THREE.WebGLRenderer = function ( parameters ) {
 	_clearAlpha = 0;
 
 	var lights = [];
+	
+	function PoolArray() {
+		Object.defineProperty(this, 'length',
+			{
+				get: function() {
+					return this.virtual ? this.virtualLength : this.realLength;
+				},
+				set: function(value) {
+					if (this.virtual) {
+						this.virtualLength = value;
+					} else {
+						this.realLength = value;
+					}
+				}
+			}
+		);
+		this.virtual = false;
+		this.virtualLength = 0;
+		this.realLength = 0;
+	};
+	PoolArray.prototype = Array.prototype;
 
-	var opaqueObjects = [];
+	var opaqueObjects = new PoolArray();
 	var opaqueObjectsLastIndex = - 1;
-	var transparentObjects = [];
+	var transparentObjects = new PoolArray();
 	var transparentObjectsLastIndex = - 1;
 
 	var morphInfluences = new Float32Array( 8 );
@@ -1105,8 +1126,12 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 		sprites.length = 0;
 		lensFlares.length = 0;
+		
+		opaqueObjects.virtual = transparentObjects.virtual = false;
 
 		projectObject( scene, camera );
+		
+		opaqueObjects.virtual = transparentObjects.virtual = true;
 
 		opaqueObjects.length = opaqueObjectsLastIndex + 1;
 		transparentObjects.length = transparentObjectsLastIndex + 1;
